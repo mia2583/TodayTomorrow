@@ -6,6 +6,7 @@ import {
   SignInResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {GOOGLE_WEB_CLIENT_ID} from '@env';
 
 const LoginPage = () => {
   const [user, setUser] = useState<SignInResponse | null>(null); // GoogleUser 타입 정의
