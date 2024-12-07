@@ -34,7 +34,9 @@ function LoginPage({navigation}: any) {
         }),
       );
       setErrorMessage(''); // 에러 메시지 초기화
-      navigation.navigate('Main'); // 페이지 이동
+      if (userInfo.data?.user.name && userInfo.data?.user.email) {
+        navigation.replace('Main'); // 페이지 이동
+      }
     } catch (error: unknown) {
       // 에러 핸들링
       if (error instanceof Error) {
