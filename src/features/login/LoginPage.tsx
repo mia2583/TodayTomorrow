@@ -3,13 +3,14 @@ import {View, Text, StyleSheet} from 'react-native';
 import {
   GoogleSignin,
   GoogleSigninButton,
-  SignInResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {useDispatch} from 'react-redux';
+import {setUserAuth} from '../../../modules/redux/slice/UserAuthSlice';
 import {GOOGLE_WEB_CLIENT_ID} from '@env';
 
-const LoginPage = () => {
-  const [user, setUser] = useState<SignInResponse | null>(null); // GoogleUser 타입 정의
+function LoginPage({navigation}: any) {
+  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState('');
 
   // Google Sign-In 초기화
@@ -24,10 +25,16 @@ const LoginPage = () => {
     try {
       // Google Play Services 확인
       await GoogleSignin.hasPlayServices();
-      // 사용자 로그인
-      const response = await GoogleSignin.signIn();
-      setUser(response);
-      setErrorMessage(''); // 에러 초기화
+      // 사용자 로그인 및 정보 저장
+      const userInfo = await GoogleSignin.signIn();
+      dispatch(
+        setUserAuth({
+          name: userInfo.data?.user.name,
+          email: userInfo.data?.user.email,
+        }),
+      );
+      setErrorMessage(''); // 에러 메시지 초기화
+      navigation.navigate('Main'); // 페이지 이동
     } catch (error: unknown) {
       // 에러 핸들링
       if (error instanceof Error) {
@@ -55,17 +62,11 @@ const LoginPage = () => {
         color={GoogleSigninButton.Color.Light}
         onPress={SignIn}
       />
-      {user ? (
-        <Text style={styles.text}>
-          로그인 성공: {user.data?.user.email} (이름: {user.data?.user.name})
-        </Text>
-      ) : (
-        <Text style={styles.text}>로그인 필요</Text>
-      )}
+      <Text style={styles.text}>로그인 필요</Text>
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
