@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {store} from './modules/redux/Store';
 
 import LoginPage from './src/features/login/LoginPage';
-import MainPage from './src/features/main/MainPage';
+import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -14,8 +14,16 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={LoginPage} />
-          <Stack.Screen name="Main" component={MainPage} />
+          <Stack.Screen
+            name="Login"
+            component={LoginPage}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MainTabs"
+            component={BottomTabNavigator}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
