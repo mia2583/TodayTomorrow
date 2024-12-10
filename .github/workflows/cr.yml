@@ -17,4 +17,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LANGUAGE: Korean
-          IGNORE_PATTERNS: /node_modules,*.md # Regex pattern to ignore files, separated by comma
+          max_tokens: 1000
+          IGNORE_PATTERNS: /node_modules,*.md, *.json, *.gradle # Regex pattern to ignore files, separated by comma
+          INCLUDE_PATTERNS: *.js, *.tsx, *.ts
