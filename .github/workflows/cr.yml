@@ -18,5 +18,4 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LANGUAGE: Korean
           max_tokens: 1000
-          IGNORE_PATTERNS: /node_modules,*.md, *.json, *.gradle # Regex pattern to ignore files, separated by comma
-          INCLUDE_PATTERNS: *.js, *.tsx, *.ts
+          IGNORE_PATTERNS: /node_modules, *.md, *.json, *.gradle, *.xml # Regex pattern to ignore files, separated by comma
