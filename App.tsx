@@ -3,6 +3,7 @@ import {Provider} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {store} from './modules/redux/Store';
+import 'react-native-get-random-values';
 
 import LoginPage from './src/features/login/LoginPage';
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
