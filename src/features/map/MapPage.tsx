@@ -22,7 +22,10 @@ async function requestLocationPermission() {
 
 export default function MapPage() {
   useEffect(() => {
-    requestLocationPermission();
+    const checkPermission = async () => {
+      await requestLocationPermission();
+    };
+    checkPermission();
   }, []);
 
   const [region, setRegion] = useState({
