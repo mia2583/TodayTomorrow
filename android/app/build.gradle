@@ -58,6 +58,7 @@ project.ext.vectoricons = [
     iconFontNames: [ 'MaterialCommunityIcons.ttf', 'MaterialIcons.ttf' ] // Name of the font files you want to copy
 ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 
 /**
@@ -90,7 +91,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [GOOGLE_MAP_KEY: "$System.env.GOOGLE_MAP_KEY"]
+        manifestPlaceholders = [GOOGLE_MAP_KEY: project.hasProperty("GOOGLE_MAP_KEY") ? GOOGLE_MAP_KEY : ""]
     }
     signingConfigs {
         debug {
